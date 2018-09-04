@@ -12,6 +12,8 @@
 -include("jlib.hrl").
 -include("ejabberd_http.hrl").
 
+-import(lists, [duplicate/2, flatlength/1]).
+
 
 % application constants
 -define(MYSQL, mysql).
@@ -21,11 +23,12 @@
 %-define(CRYPTO, crypto).
 %% add additional applications
 
-
 process([], #request{method = 'GET', path = [<<"healthcheck">>]}) ->
-    Status = get_all_status(),
+    StatusList = get_all_status(),
+    StatusLength = flatlength(StatusList),
+    ExpectedStatusListResult = duplicate(StatusLength, true),
     if
-        Status == [true, true, true] ->
+        StatusList == ExpectedStatusListResult ->
             {204, [], <<"">>};
         true ->
             {503, [], <<"">>}
@@ -36,4 +39,4 @@ get_all_status() ->
   	MYSQLStatus = lists:keymember(?MYSQL, 1, application:which_applications()),
   	SSLStatus = lists:keymember(?SSL, 1, application:which_applications()),
   	?DEBUG("MOD_HEALTHCHECK checking status of Ejabberd : ~p\nMYSQL : ~p\nSSL : ~p", [EJABBERDStatus,MYSQLStatus,SSLStatus]),
-  	[EJABBERDStatus, MYSQLStatus, SSLStatus].
+    [EJABBERDStatus, MYSQLStatus, SSLStatus].
