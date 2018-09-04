@@ -4,7 +4,7 @@ Monitor Ejabberd and any applications running on it.
 Based on https://github.com/nycholas/ which is based on https://www.ejabberd.im/mod_monitor_web 14.02+
 
 ## Objective
-The target is to include the response of the healthcheck on the response status code.
+The target is to include the status code on the response of the healthcheck on the response status code.
 - 204 response for all checked and properly running.
 - 503 response when any of the services defined on the module are failling.
 
