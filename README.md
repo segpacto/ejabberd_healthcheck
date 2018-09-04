@@ -34,5 +34,5 @@ Define the application name as a constant at the top of the file:
 -define(MYSQL, mysql).
 ```
 
-then add subsecuently after line #37 another check for the new status added, then increment the
-array of values to check line #28
+then add subsecuently on function ```get_all_status``` another check variable for the new status 
+added (like: ```EJABBERDStatus = lists:keymember(?EJABBERD, 1, application:which_applications()),```), add this new obtained variable status to the list of results.
