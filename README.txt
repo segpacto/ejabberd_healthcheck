@@ -1,8 +1,12 @@
 #mod_health
 
 Monitor Ejabberd and any applications running on it.
-Based on https://www.ejabberd.im/mod_monitor_web but updated for Ejabberd 14.02+
+Based on https://github.com/nycholas/ which is based on https://www.ejabberd.im/mod_monitor_web 14.02+
 
+## Objective
+The target is to include the response of the healthcheck on the response status code.
+- 204 response for all checked and properly running.
+- 503 response when any of the services defined on the module are failling.
 
 ## Ejabberd Config
 First make sure the module is added in ejabberd.yml on the server port
@@ -30,8 +34,5 @@ Define the application name as a constant at the top of the file:
 -define(MYSQL, mysql).
 ```
 
-And then add the check in the check_health function:
-
-```erlang
-MySQL = get_status(?MYSQL),
-```
+then add subsecuently after line #37 another check for the new status added, then increment the
+array of values to check line #28
