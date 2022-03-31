@@ -1,5 +1,5 @@
 %%% ---------------------------------------
-%%% Segpacto
+%%% Health check for SSL, MySql on ejabberd
 %%% ---------------------------------------
 
 -module(mod_health).
@@ -17,10 +17,8 @@
 
 % application constants
 -define(MYSQL, mysql).
-%-define(MNESIA, mnesia).
 -define(EJABBERD, ejabberd).
 -define(SSL, ssl).
-%-define(CRYPTO, crypto).
 %% add additional applications
 
 process([], #request{method = 'GET', path = [<<"healthcheck">>]}) ->
